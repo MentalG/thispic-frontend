@@ -1,13 +1,10 @@
 import React from 'react';
-// import image from '../../materials/purple.png';
+import Navbar from '../Navbar';
 
 function App() {
-  // const myImageData = 
-
   return (
     <div className="App">
-      <div>123</div>
-      <canvas onLoad={() => console.log('loaded')}></canvas>
+      <Navbar />
     </div>
   );
 }
