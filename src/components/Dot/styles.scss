@@ -1,9 +1,38 @@
+@import '../../styles/circle.scss';
+
 .dot_container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 192px;
   height: 100%;
+
+  .colors_container {
+    position: absolute;
+
+    .colors_wrapper {
+      display: flex;
+      position: relative;
+      transform: rotate(-53deg) translateX(-8px) translateY(-8px);
+
+      @for $i from 1 through 12 {
+        div:nth-child(#{$i}) {
+          $deg: $i * 22deg;
+          $rad: _to_unitless_rad($deg);
+          $x: cos($rad) * 50;
+          $y: sin($rad) * 50;
+          transform: translateX(#{$x}px) translateY(#{$y}px);
+          position: absolute;
+        }
+      }
+
+      .color {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+      }
+    }
+  }
 
   .dot_wrapper {
     display: flex;
