@@ -1,14 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import ColorDot from '../ColorDot';
-import { getColorsData } from '../../store/selectors/colors';
 import './styles.scss';
 
 const Dot = (props) => {
-  const { color } = props;
-  const data = useSelector(getColorsData);
-  const { palitra } = data;
+  const { color, palitra } = props;
 
   return (
     <div className='dot_container'>

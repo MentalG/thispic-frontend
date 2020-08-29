@@ -1,6 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { getColorsData } from '../../store/selectors/colors';
 import './styles.scss';
 
 const getRandomNumber = () => {
@@ -8,8 +6,7 @@ const getRandomNumber = () => {
 }
 
 const AddDot = (props) => {
-  const { addDot } = props;
-  const { palitra, secondary } = useSelector(getColorsData);
+  const { addDot, palitra, secondary } = props;
   const params = {
     id: secondary.length,
     color: palitra[getRandomNumber()]

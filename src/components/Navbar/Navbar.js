@@ -9,7 +9,7 @@ import './styles.scss';
 const Navbar = (props) => {
   const dispatch = useDispatch();
   const [isAddOpen, setIsAddOpen] = useState(false);
-  const { secondary, dominant } = useSelector(getColorsData);
+  const { secondary, dominant, palitra } = useSelector(getColorsData);
   const secondaryReversed = [...secondary].reverse();
   const gradient = `linear-gradient(90deg, ${dominant} 40%, ${secondaryReversed.map(
     ({ color, id }) => `${color} ${95 - id * 10}%`
@@ -22,7 +22,7 @@ const Navbar = (props) => {
   const renderNavbarLeft = () => {
     return (
       <div className='navbar_left'>
-        <Dot color={dominant} />
+        <Dot color={dominant} palitra={palitra} />
       </div>
     );
   };
@@ -36,10 +36,10 @@ const Navbar = (props) => {
       >
         <div className='dots_container'>
           {isAddOpen && secondary.length < 5 ? (
-            <AddDot addDot={addDot} />
+            <AddDot palitra={palitra} secondary={secondary} addDot={addDot} />
           ) : null}
           {secondaryReversed.map(({ color, id }) => {
-            return <Dot color={color} key={id} count={id} />;
+            return <Dot color={color} palitra={palitra} key={id} count={id} />;
           })}
         </div>
       </div>
