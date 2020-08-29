@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import ColorDot from '../ColorDot';
@@ -6,10 +6,9 @@ import { getColorsData } from '../../store/selectors/colors';
 import './styles.scss';
 
 const Dot = (props) => {
-  const { type, count } = props;
+  const { color } = props;
   const data = useSelector(getColorsData);
-  const { dominant, secondary, palitra } = data;
-  const dotColor = type === 'dominant' ? dominant : secondary[count].color;
+  const { palitra } = data;
 
   return (
     <div className='dot_container'>
@@ -23,7 +22,7 @@ const Dot = (props) => {
         </div>
       </div>
       <div className='dot_wrapper'>
-        <div className='dot' style={{ background: dotColor }}></div>
+        <div className='dot' style={{ background: color }}></div>
       </div>
     </div>
   );

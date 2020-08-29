@@ -11,30 +11,45 @@ const Navbar = (props) => {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const { secondary, dominant } = useSelector(getColorsData);
   const secondaryReversed = [...secondary].reverse();
-  const gradient = `linear-gradient(90deg, ${dominant} 50%, ${secondaryReversed.map(({color, id}) => `${color} ${100 - (id * 10)}%`)})` 
+  const gradient = `linear-gradient(90deg, ${dominant} 40%, ${secondaryReversed.map(
+    ({ color, id }) => `${color} ${95 - id * 10}%`
+  )})`;
 
   const addDot = (color) => {
     dispatch(addColor(color));
-  }
+  };
 
-  return (
-    <div className='navbar' style={{background: gradient}}>
+  const renderNavbarLeft = () => {
+    return (
       <div className='navbar_left'>
-        <Dot type='dominant'/>
+        <Dot color={dominant} />
       </div>
+    );
+  };
+
+  const renderNavbarRight = () => {
+    return (
       <div
         className='navbar_right'
         onMouseEnter={() => setIsAddOpen(true)}
         onMouseLeave={() => setIsAddOpen(false)}
       >
         <div className='dots_container'>
-          {isAddOpen && secondary.length < 5 ? <AddDot addDot={addDot}/> : null}
-          {secondaryReversed.map((item) => {
-              const { color, id } = item;
-              return <Dot type='secondary' color={color} key={id} count={id}/>
+          {isAddOpen && secondary.length < 5 ? (
+            <AddDot addDot={addDot} />
+          ) : null}
+          {secondaryReversed.map(({ color, id }) => {
+            return <Dot color={color} key={id} count={id} />;
           })}
         </div>
       </div>
+    );
+  };
+
+  return (
+    <div className='navbar' style={{ background: gradient }}>
+        {renderNavbarLeft()}
+        {renderNavbarRight()}
     </div>
   );
 };
