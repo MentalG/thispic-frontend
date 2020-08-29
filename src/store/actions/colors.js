@@ -1,7 +1,14 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const setDominantColor = createAction('colors/dominant/set');
 export const addSecondaryColor = createAction('colors/secondary/add');
+export const setDominantColor = createAction('colors/dominant/set');
+export const setSecondaryColor = createAction('colors/secondary/set');
+
+export function addColor(params) {
+    return (dispatch) => {
+        dispatch(addSecondaryColor(params))
+    }
+}
 
 export function changeDominantColor(color) {
     return (dispatch) => {
@@ -9,8 +16,8 @@ export function changeDominantColor(color) {
     }
 }
 
-export function addColor(params) {
+export function changeSecondaryColor(params) {
     return (dispatch) => {
-        dispatch(addSecondaryColor(params))
+        dispatch(setSecondaryColor(params))
     }
 }

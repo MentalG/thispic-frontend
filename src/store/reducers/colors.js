@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { setDominantColor, addSecondaryColor } from '../actions/colors';
+import { addSecondaryColor, setDominantColor, setSecondaryColor } from '../actions/colors';
 
 const initialState = {
   colors: {
@@ -29,10 +29,14 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-  [setDominantColor]: (state, payload) => {
-    state.colors.dominant = payload;
-  },
   [addSecondaryColor]: (state, { payload }) => {
     state.colors.secondary =  [...state.colors.secondary, payload];
+  },
+  [setDominantColor]: (state, { payload }) => {
+    state.colors.dominant = payload;
+  },
+  [setSecondaryColor]: (state, { payload }) => {
+    const { id, color } = payload
+    state.colors.secondary[id].color = color;
   },
 });
