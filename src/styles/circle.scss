@@ -1,8 +1,6 @@
 $pi: 3.14159265359;
 $_precision: 10;
 
-
-
 @function pow($base, $exp) {
   $value: $base;
   @if $exp > 1 {

@@ -4,8 +4,12 @@ import './styles.scss';
 const ColorDot = (props) => {
   const { color } = props;
 
+  const clickHandle = color => {
+    console.log(color);
+  }
+
   return (
-    <div className='color' style={{background: color}}></div>
+    <div className='color' style={{background: color}} onClick={() => clickHandle(color)}></div>
   );
 };
 
