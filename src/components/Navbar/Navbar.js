@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getColorsData } from '../../store/selectors/colors';
 import { addColor } from '../../store/actions/colors';
+import { getImages } from '../../store/actions/images';
 import Dot from '../Dot';
 import AddDot from '../AddDot';
 import './styles.scss';
@@ -14,6 +15,11 @@ const Navbar = (props) => {
   const gradient = `linear-gradient(90deg, ${dominant} 40%, ${secondaryReversed.map(
     ({ color, id }) => `${color} ${95 - id * 10}%`
   )})`;
+
+    useEffect(() => {
+
+      dispatch(getImages({dominant, secondary}))
+    },[])
 
   const addDot = (color) => {
     dispatch(addColor(color));
