@@ -17,7 +17,6 @@ const Navbar = (props) => {
   )})`;
 
     useEffect(() => {
-
       dispatch(getImages({dominant, secondary}))
     },[])
 
