@@ -18,7 +18,7 @@ const Navbar = (props) => {
 
     useEffect(() => {
       dispatch(getImages({dominant, secondary}))
-    },[])
+    },[dominant, secondary, dispatch])
 
   const addDot = (color) => {
     dispatch(addColor(color));

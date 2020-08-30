@@ -10,7 +10,6 @@ const initialState = {
         id: 0,
         color: '#00AAFF',
       },
-
     ],
     palitra: [
       '#FF0000',

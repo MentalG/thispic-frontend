@@ -8,8 +8,11 @@ export const getImagesSuccess = createAction('S:images/get')
 export function getImages(colors) {
     return async (dispatch) => {
         try {
-            const response = await api.images.getImages(dumpColors(colors));
-            console.dir(response);
+            dispatch(getImagesRequest);
+            // const response = await api.images.getImages(dumpColors(colors));
+            const response = await api.images.getImages();
+
+            dispatch(getImagesSuccess(response));
         } catch (error) {
             console.log(error);
         }
