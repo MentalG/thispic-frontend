@@ -2,6 +2,15 @@
     z-index: 100;
 }
 
+@keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
 .color:hover {
     cursor: pointer;
 }

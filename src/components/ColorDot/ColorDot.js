@@ -6,7 +6,7 @@ import './styles.scss';
 
 const ColorDot = (props) => {
   const dispath = useDispatch();
-  const { color, count } = props;
+  const { color, count, dataKey } = props;
 
   const clickHandle = color => {
     const params = {
@@ -17,7 +17,8 @@ const ColorDot = (props) => {
   }
 
   return (
-    <div className='color' style={{background: color}} onClick={() => clickHandle(color)}></div>
+    <div className='color' style={{background: color, animation: `appear ${0.2 * dataKey}s`}} onClick={() => clickHandle(color)}>
+    </div>
   );
 };
 

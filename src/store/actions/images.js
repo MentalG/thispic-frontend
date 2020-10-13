@@ -9,8 +9,7 @@ export function getImages(colors) {
     return async (dispatch) => {
         try {
             dispatch(getImagesRequest);
-            // const response = await api.images.getImages(dumpColors(colors));
-            const response = await api.images.getImages();
+            const response = await api.images.getImages(dumpColors(colors));
 
             dispatch(getImagesSuccess(response));
         } catch (error) {

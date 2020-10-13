@@ -13,7 +13,7 @@ const Dot = (props) => {
         <div className='colors_container'>
           <div className='colors_wrapper'>
             {palitra.map((subColor, index) => {
-              return <ColorDot color={subColor} key={index} count={count}/>;
+              return <ColorDot color={subColor} key={index} count={count} dataKey={index}/>;
             })}
           </div>
         </div>

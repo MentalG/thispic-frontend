@@ -7,17 +7,14 @@ const Content = (props) => {
   const { data } = useSelector(getImagesData);
   const API_PREFIX = process.env.REACT_APP_API_PREFIX;
 
-  // useEffect(() => {
-  //     console.log(data)
-  // }, [data])
-
   return (
     <div className='content_container'>
-      {data?.map(({ imageUrl, name }, key) => {
+      {data?.map(({ imageUrl, name, hash }, key) => {
         const url = `${API_PREFIX}/${imageUrl}`;
+
         return (
-          <div key={key}>
-            <img src={url} alt={name}/>
+            <div className='picture_container' key={key} onClick={() => window.open(`${API_PREFIX}/images/${hash}`)}>
+              <img src={url} alt={name} />
           </div>
         );
       })}
