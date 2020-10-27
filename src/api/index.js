@@ -1,5 +1,6 @@
 import ApiClient from './apiClient'
 import Images from './images'
+import Auth from './auth'
 
 export default function ({ apiPrefix, isServer = false } = {}) {
     if (!apiPrefix) {
@@ -9,6 +10,7 @@ export default function ({ apiPrefix, isServer = false } = {}) {
 
     return {
         apiClient   : api,
-        images       : new Images({ apiClient: api })
+        images      : new Images({ apiClient: api }),
+        auth        : new Auth({ apiClient: api })
     }
 }

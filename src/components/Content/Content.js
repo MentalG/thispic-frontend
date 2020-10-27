@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getImagesData } from '../../store/selectors/images';
 import Modal from 'react-modal';
-import SignIn from '../SignIn'
+import SignUp from '../SignUp'
 import './styles.scss';
 
 const modalStyles = {
@@ -37,7 +37,7 @@ const Content = (props) => {
         );
       })}
       <div className='logIn_container' onClick={() => setModalOpen(true)}>
-        <span>Log In</span>
+        <span>Sign Up</span>
       </div>
         <Modal
           isOpen={isModalOpen}
@@ -46,7 +46,7 @@ const Content = (props) => {
           shouldCloseOnOverlayClick={true}
           onRequestClose={() => setModalOpen(false)}
         >
-          <SignIn />
+          <SignUp />
         </Modal>
     </div>
   );
