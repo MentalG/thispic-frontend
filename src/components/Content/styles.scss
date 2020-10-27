@@ -10,18 +10,41 @@
   }
 
   img {
+    outline: 0px solid rgb(170, 0, 255);
+    outline-offset: 0px;
     width: 100%;
     height: 100%;
-    transition: ease-out 0.4s;
+    -webkit-transition: ease-out 0.3s;
   }
 
-  
   img:hover {
-    outline: 5px solid black;
+    outline: 5px solid rgb(170, 0, 255);
     outline-offset: -5px;
     cursor: pointer;
-    transition: ease-out 0.4s;
+    -webkit-transition: ease-out 0.3s;
   }
 
+  .logIn_container {
+  font-family: 'FuturaPT';
 
+    position: fixed;
+    bottom: 0;
+    left: 42.5%;
+    width: 300px;
+    height: 50px;
+    background: #aa00ff;
+    border-radius: 50px 50px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    -webkit-transition: ease-out 0.4s;
+  }
+
+  .logIn_container:hover {
+    background: #67019a;
+    cursor: pointer;
+    -webkit-transition: ease-out 0.4s;
+  }
 }
