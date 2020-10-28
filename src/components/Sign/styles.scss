@@ -1,9 +1,6 @@
-@font-face {
-  font-family: 'FuturaPT';
-  src: url('../../styles/FuturaPT.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-}
+@import '../../styles/font.scss';
 
-.SignUp_container {
+.Sign_container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -16,12 +13,12 @@
     color: white;
   }
 
-  #SignUp {
+  #Sign {
     font-size: 64px;
     margin-bottom: 40px;
   }
 
-  #SignUp_sub {
+  #Sign_sub {
     font-size: 24px;
     margin-bottom: 20px;
   }
@@ -52,7 +49,7 @@
       border: 2px solid #000;
     }
 
-    #SignUp_button {
+    #Sign_button {
       cursor: pointer;
       background: #000;
       display: flex;
@@ -70,7 +67,7 @@
       -webkit-transition: ease-out 0.5s;
     }
 
-    #SignUp_button:hover {
+    #Sign_button:hover {
       -webkit-transition: ease-out 0.5s;
       border: 2px solid white;
     }

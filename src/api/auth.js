@@ -1,6 +1,10 @@
 import Base from './base';
 export default class Auth extends Base {
-    registration(params) {
-        return this.apiClient.post('auth/create', params);
+    registration(body) {
+        return this.apiClient.post('auth/create', body);
+    }
+
+    login(params) {
+        return this.apiClient.get('auth/login', params);
     }
 }

@@ -1,10 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { registrationRequest, registrationSuccess } from '../actions/auth';
+import { registrationRequest, registrationSuccess, loginRequest, loginSuccess, logoutSuccess } from '../actions/auth';
 
 const initialState = {
   token : '',
-  isLoading : false
+  isLoading : false,
 };
 
 export default createReducer(initialState, {
@@ -15,4 +15,14 @@ export default createReducer(initialState, {
     state.isLoading =  false;
     state.token = payload;
   },
+  [loginRequest]: (state, { payload }) => {
+    state.isLoading =  true;
+  },
+  [loginSuccess]: (state, { payload }) => {
+    state.isLoading =  false;
+    state.token = payload;
+  },
+  [logoutSuccess] : (state) => {
+    state.token = ''
+  }
 });

@@ -2,7 +2,6 @@ import { TOKEN } from '../constans/storage';
 
 export const getFromStorage = async key => {
     let data = await localStorage.getItem(key)
-    data = JSON.parse(data)
     return data
 }
 
