@@ -49,6 +49,7 @@ export function logout() {
     return async (dispatch) => {
         try {
             localStorage.removeItem(TOKEN)
+            window.location.reload();
             dispatch(logoutSuccess())
         } catch (error) {
             console.log(error);

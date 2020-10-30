@@ -7,4 +7,8 @@ export default class Image extends Base {
     downloadImage(hash, params) {
         return this.apiClient.get(`images/${hash}`, params);
     }
+
+    uploadImage(body) {
+        return this.apiClient.post(`images/add`, body);
+    }
 }
