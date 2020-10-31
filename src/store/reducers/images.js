@@ -1,9 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { getImagesRequest, getImagesSuccess } from '../actions/images';
+import { getImagesRequest, getImagesSuccess, setImageRequest, setImageSuccess } from '../actions/images';
 
 const initialState = {
-    isLoading: false,
+    isLoadingImages: false,
+    isUploadingImage: false,
     data: []
 }
 
@@ -14,5 +15,11 @@ export default createReducer(initialState, {
     [getImagesSuccess]: (state, { payload }) => {
         state.isLoading = false
         state.data = [...payload]
+    },
+    [setImageRequest]: (state) => {
+        state.isUploadingImage = true
+    },
+    [setImageSuccess]: (state, { payload }) => {
+        state.isUploadingImage = false
     } 
 })

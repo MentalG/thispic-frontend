@@ -9,7 +9,9 @@ export default class Image extends Base {
   }
 
   uploadImage(body) {
-    return fetch('http://localhost:5000/images/add', {
+    const url = process.env.REACT_APP_API_PREFIX;
+
+    return fetch(`${url}/images/add`, {
       method: 'POST',
       body,
     })

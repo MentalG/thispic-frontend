@@ -23,12 +23,10 @@ export function getImages(colors) {
 export function setImage(image) {
     return async (dispatch) => {
         try {
-            // dispatch(setImageRequest);
+            dispatch(setImageRequest);
             const response = await api.images.uploadImage(image);
 
-            console.log(response);
-
-            // dispatch(getImagesSuccess(setImageSuccess));
+            dispatch(setImageSuccess(response));
         } catch (error) {
             console.log(error);
         }
