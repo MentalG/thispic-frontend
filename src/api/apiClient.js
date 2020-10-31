@@ -62,7 +62,7 @@ export default class ApiClient {
         return response
     }
 
-    async fetch({ url, method, params = {}, body, contentType = 'application/json' }) {
+    async fetch({ url, method, params = {}, body}) {
         let token = ''
         if (!this.isServer) token = await this.getToken()
         const stringifyParams = Object.keys(params).length ? `?${queryString.stringify({ ...params })}` : ''
@@ -80,6 +80,8 @@ export default class ApiClient {
             credentials : 'same-origin',
             headers
         }
+
+        console.log(init);
 
         if (method !== 'GET' && method !== 'HEAD') {
             init.body = JSON.stringify(body)
