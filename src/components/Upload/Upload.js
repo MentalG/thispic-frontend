@@ -22,7 +22,6 @@ const Upload = (props) => {
     formData.append('productImage', acceptedFiles[0])
     formData.append('name', name)
 
-    console.log(formData);
     dispatch(setImage(formData));
   }
 

@@ -24,12 +24,9 @@ export function setImage(image) {
     return async (dispatch) => {
         try {
             // dispatch(setImageRequest);
-            fetch('http://localhost:5000/images/add', {
-                method: 'POST',
-                body: image
-            })
-            .then(response => (response.json().then(res => console.log(res))))
-            .catch(err => console.log(err))
+            const response = await api.images.uploadImage(image);
+
+            console.log(response);
 
             // dispatch(getImagesSuccess(setImageSuccess));
         } catch (error) {

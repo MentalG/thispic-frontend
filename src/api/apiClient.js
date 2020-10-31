@@ -1,5 +1,6 @@
 import queryString   from 'query-string'
 import fetch         from 'node-fetch'
+import { getToken } from '../utils/localstorage'
 
 export default class ApiClient {
     constructor({ prefix = 'api/v1', isServer = false } = {}) {
@@ -43,13 +44,13 @@ export default class ApiClient {
         })
     }
 
-    // async getToken() {
-    //     if (!this.token) {
-    //         this.token = await getToken() || ''
-    //     }
+    async getToken() {
+        if (!this.token) {
+            this.token = await getToken() || ''
+        }
 
-    //     return this.token
-    // }
+        return this.token
+    }
 
     resetToken() {
         this.token = null
@@ -61,9 +62,9 @@ export default class ApiClient {
         return response
     }
 
-    async fetch({ url, method, params = {}, body }) {
+    async fetch({ url, method, params = {}, body, contentType = 'application/json' }) {
         let token = ''
-        // if (!this.isServer) token = await this.getToken()
+        if (!this.isServer) token = await this.getToken()
         const stringifyParams = Object.keys(params).length ? `?${queryString.stringify({ ...params })}` : ''
         const urlWithQuery = `${url}${stringifyParams}`
 
