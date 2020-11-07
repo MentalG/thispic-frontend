@@ -81,8 +81,6 @@ export default class ApiClient {
             headers
         }
 
-        console.log(init);
-
         if (method !== 'GET' && method !== 'HEAD') {
             init.body = JSON.stringify(body)
         }

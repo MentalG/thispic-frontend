@@ -10,10 +10,10 @@ const initialState = {
 
 export default createReducer(initialState, {
     [getImagesRequest]: (state) => {
-        state.isLoading = true
+        state.isLoadingImages = true
     },
     [getImagesSuccess]: (state, { payload }) => {
-        state.isLoading = false
+        state.isLoadingImages = false
         state.data = [...payload]
     },
     [setImageRequest]: (state) => {

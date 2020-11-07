@@ -36,7 +36,7 @@ export function login(user) {
             const response = await api.auth.login(user);
 
             if (response.token !== undefined) {
-                dispatch(loginSuccess(response.token))
+                dispatch(loginSuccess(response))
                 localStorage.setItem(TOKEN, response.token);
             }
         } catch (error) {

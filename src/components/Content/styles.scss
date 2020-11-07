@@ -16,13 +16,6 @@
     -webkit-transition: ease-out 0.3s;
   }
 
-  // img:hover {
-  //   outline: 5px solid rgb(170, 0, 255);
-  //   outline-offset: -5px;
-  //   cursor: pointer;
-  //   -webkit-transition: ease-out 0.3s;
-  // }
-
   .menu_container {
     font-family: 'FuturaPT';
     visibility: hidden;
@@ -55,16 +48,10 @@
       }
 
       span:hover {
-        background: #67019a;
+        filter: hue-rotate(50deg);
         cursor: pointer;
         -webkit-transition: ease-out 0.4s;
       }
     }
   }
-
-  // .menu_container:hover {
-  //   background: #67019a;
-  //   cursor: pointer;
-  //   -webkit-transition: ease-out 0.4s;
-  // }
 }

@@ -26,7 +26,8 @@ const Content = (props) => {
   const gradient = `linear-gradient(90deg, ${dominant} 50%, ${secondaryReversed.map(
     ({ color, id }) => `${color} ${100 - id * 10}%`
   )})`;
-
+  document.body.style.background = gradient;
+  
   useEffect(() => {
     const fetchToken = async () => {
       const token = await getToken();
@@ -82,7 +83,7 @@ const Content = (props) => {
   };
 
   return (
-    <div className='content_container' style={{background: gradient}}>
+    <div className='content_container'>
       {data?.map(({ imageUrl, name, hash }, key) => {
         const url = `${API_PREFIX}/${imageUrl}`;
 

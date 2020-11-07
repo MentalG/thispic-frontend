@@ -12,7 +12,6 @@ export default class Image extends Base {
   async uploadImage(body) {
     const url = process.env.REACT_APP_API_PREFIX;
     const token = await getToken();
-    console.log(token);
 
     return fetch(`${url}/images/add`, {
       method: 'POST',
