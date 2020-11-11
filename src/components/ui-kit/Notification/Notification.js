@@ -6,7 +6,6 @@ import './styles.scss';
 
 const Notification = (props) => {
   const { isNotification, message, type, setIsNotification } = props;
-  console.log(props);
   let messageColor = '';
   let icon = <div></div>;
 

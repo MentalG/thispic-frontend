@@ -6,6 +6,7 @@ export const getImagesRequest = createAction('R:images/get')
 export const getImagesSuccess = createAction('S:images/get')
 export const setImageRequest = createAction('R:images/set')
 export const setImageSuccess = createAction('S:images/set')
+export const setImageFailure = createAction('F:images/set')
 
 export function getImages(colors) {
     return async (dispatch) => {
@@ -24,9 +25,14 @@ export function setImage(image) {
     return async (dispatch) => {
         try {
             dispatch(setImageRequest);
-            const response = await api.images.uploadImage(image);
+            const response = (await api.images.uploadImage(image));
+            
+            if(response.type !== 'error') {
+                dispatch(setImageSuccess(response));
+            } else {
+                dispatch(setImageFailure(response));
+            }
 
-            dispatch(setImageSuccess(response));
         } catch (error) {
             console.log(error);
         }

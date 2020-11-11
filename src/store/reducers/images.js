@@ -1,11 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { getImagesRequest, getImagesSuccess, setImageRequest, setImageSuccess } from '../actions/images';
+import { getImagesRequest, getImagesSuccess, setImageRequest, setImageSuccess, setImageFailure } from '../actions/images';
 
 const initialState = {
     isLoadingImages: false,
     isUploadingImage: false,
-    data: []
+    data: [],
+    imagesNotification: {message : { primary: '', secondary: '' }, type: ''}
 }
 
 export default createReducer(initialState, {
@@ -21,5 +22,12 @@ export default createReducer(initialState, {
     },
     [setImageSuccess]: (state, { payload }) => {
         state.isUploadingImage = false
-    } 
+        state.imagesNotification.message = payload.message
+        state.imagesNotification.type = 'success'
+    },
+    [setImageFailure]: (state, { payload }) => {
+        state.isUploadingImage = false
+        state.imagesNotification.message = payload.message
+        state.imagesNotification.type = 'error'
+    },
 })

@@ -5,7 +5,7 @@ import { registrationRequest, registrationSuccess, loginRequest, loginSuccess, l
 const initialState = {
   token : '',
   isLoading : false,
-  notification: {message : { primary: '', secondary: '' }, type: ''},
+  authNotification: {message : { primary: '', secondary: '' }, type: ''},
 };
 
 export default createReducer(initialState, {
@@ -22,8 +22,8 @@ export default createReducer(initialState, {
   [loginSuccess]: (state, { payload }) => {
     state.isLoading =  false;
     state.token = payload.token;
-    state.notification.message = payload.message
-    state.notification.type = 'success'
+    state.authNotification.message = payload.message
+    state.authNotification.type = 'success'
   },
   [logoutSuccess] : (state) => {
     state.token = ''
