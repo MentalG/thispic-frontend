@@ -1,0 +1,11 @@
+@import '../../styles/font.scss';
+
+.NoPicture_wrapper {
+    font-family: 'FuturaPT';
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
+}

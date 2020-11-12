@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { registrationRequest, registrationSuccess, loginRequest, loginSuccess, logoutSuccess } from '../actions/auth';
+import { registrationRequest, registrationSuccess, registrationFailure, loginRequest, loginSuccess, loginFailure, logoutSuccess } from '../actions/auth';
 
 const initialState = {
   token : '',
@@ -14,7 +14,15 @@ export default createReducer(initialState, {
   },
   [registrationSuccess]: (state, { payload }) => {
     state.isLoading =  false;
-    state.token = payload;
+    state.token = payload.token;
+    state.authNotification.message = payload.message
+    state.authNotification.type = payload.type
+  },
+  [registrationFailure]: (state, { payload }) => {
+    state.isLoading =  false;
+    state.token = payload.token;
+    state.authNotification.message = payload.message
+    state.authNotification.type = payload.type
   },
   [loginRequest]: (state, { payload }) => {
     state.isLoading =  true;
@@ -23,7 +31,13 @@ export default createReducer(initialState, {
     state.isLoading =  false;
     state.token = payload.token;
     state.authNotification.message = payload.message
-    state.authNotification.type = 'success'
+    state.authNotification.type = payload.type
+  },
+  [loginFailure]: (state, { payload }) => {
+    state.isLoading =  false;
+    state.token = payload.token;
+    state.authNotification.message = payload.message
+    state.authNotification.type = payload.type
   },
   [logoutSuccess] : (state) => {
     state.token = ''

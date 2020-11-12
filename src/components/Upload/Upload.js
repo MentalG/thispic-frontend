@@ -9,11 +9,29 @@ import CloseIcon from '../ui-kit/icons/CloseIcon';
 import styles from './styles.scss';
 
 const Upload = (props) => {
+  const { color, oppositeColor } = props;
   const dispatch = useDispatch();
   const { getRootProps, getInputProps } = useDropzone({accept: 'image/jpeg, image/png', maxFiles: 1});
   const [acceptedFiles, setAcceptedFiles] = useState([]);
   const [isHover, setIsHover] = useState(false);
   const classBind = classNames.bind(styles);
+  let strokeColor = 'white';
+
+  switch (oppositeColor) {
+    case '#FFFFFF':
+      strokeColor = 'white';
+      break;
+      
+      case '#000000':
+      strokeColor = 'black';
+      
+      break;
+      default:
+        strokeColor = 'white';
+        break;
+  }
+
+  const dropZone = `data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='50' ry='50' stroke='${strokeColor}' stroke-width='10' stroke-dasharray='30' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e`
 
   const uploadHandle = (e) => {
     const formData = new FormData();
@@ -41,9 +59,9 @@ const Upload = (props) => {
 
   const renderUpload = () => {
     return (
-      <div {...getRootProps({ className: 'dropzone', onDrop})}>
+      <div {...getRootProps({ className: 'dropzone', onDrop})} style={{backgroundImage: `url("${dropZone}")`}}>
         <input {...getInputProps({onChange: onDrop})} />
-        <UploadIcon size={128} color={'white'} />
+        <UploadIcon size={128} color={oppositeColor} isAnimate={true}/>
       </div>
     );
   };
@@ -71,9 +89,9 @@ const Upload = (props) => {
 
   return (
     <section className='upload_container'>
-      <span id='upload_title'>Upload</span>
+      <span id='upload_title' style={{color: oppositeColor}}>Upload</span>
       {!!acceptedFiles.length ? renderFile() : renderUpload()}
-      <input placeholder='Name' type='text' />
+      <input placeholder='Name' type='text' style={{backgroundColor: oppositeColor, color}}/>
       <div id='Upload_button' onClick={(e) => uploadHandle(e)}>
           <span>Upload</span>
       </div>

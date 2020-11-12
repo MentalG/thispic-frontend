@@ -1,12 +1,14 @@
 import { createAction } from '@reduxjs/toolkit';
-import { putInStorage, getFromStorage, updateStorage } from '../../utils/localstorage';
+import { putInStorage, updateStorage } from '../../utils/localstorage';
 import { TOKEN } from '../../constans/storage'
 import api from '../../api-singleton';
 
 export const registrationRequest = createAction('R:create/post')
 export const registrationSuccess = createAction('S:create/post')
+export const registrationFailure = createAction('F:create/post')
 export const loginRequest = createAction('R:login/get')
 export const loginSuccess = createAction('S:login/get')
+export const loginFailure = createAction('F:login/get')
 export const logoutSuccess = createAction('S:logout/get')
 
 export function registration(user) {
@@ -14,15 +16,28 @@ export function registration(user) {
         try {
             dispatch(registrationRequest);
             const response = await api.auth.registration(user);
-            const isToken = await getFromStorage(TOKEN);
+            // const isToken = await getFromStorage(TOKEN);
 
-            if (isToken === undefined) {
-                updateStorage(TOKEN, response.token)
-            } else {
+            switch (response.type) {
+                case 'success':
+                dispatch(registrationSuccess(response));
                 putInStorage(TOKEN, response.token)
+                break;
+
+                case 'error':
+                dispatch(registrationFailure(response));
+                updateStorage(TOKEN, response.token)
+                break;
+
+                default:
+                console.log('default');
             }
 
-            dispatch(registrationSuccess(response.token));
+            // if (isToken === undefined) {
+            //     updateStorage(TOKEN, response.token)
+            // } else {
+            //     putInStorage(TOKEN, response.token)
+            // }
         } catch (error) {
             console.log(error);
         }
@@ -35,9 +50,19 @@ export function login(user) {
             dispatch(loginRequest);
             const response = await api.auth.login(user);
 
-            if (response.token !== undefined) {
-                dispatch(loginSuccess(response))
-                localStorage.setItem(TOKEN, response.token);
+            switch (response.type) {
+                case 'success':
+                dispatch(loginSuccess(response));
+                putInStorage(TOKEN, response.token)
+                break;
+
+                case 'error':
+                dispatch(loginFailure(response));
+                updateStorage(TOKEN, response.token)
+                break;
+
+                default:
+                console.log('default');
             }
         } catch (error) {
             console.log(error);

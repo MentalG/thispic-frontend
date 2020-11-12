@@ -5,13 +5,14 @@ import { getAuthData } from '../../store/selectors/auth';
 import { getColorsData } from '../../store/selectors/colors';
 import { logout } from '../../store/actions/auth';
 import { getToken } from '../../utils/localstorage';
+import NoPicture from '../NoPicture'
 import ModalWrap from '../ui-kit/ModalWrap';
 import MenuButton from '../ui-kit/MenuButton';
 import { mainStyle } from '../../utils/mockup/modalStyles';
 import Upload from '../Upload';
 import Sign from '../Sign';
 import PictureWrap from '../ui-kit/PictureWrap';
-import './styles.scss';
+import './styles.scss'
 
 const Content = (props) => {
   const dispatch = useDispatch();
@@ -27,6 +28,21 @@ const Content = (props) => {
     ({ color, id }) => `${color} ${100 - id * 10}%`
   )})`;
   document.body.style.background = gradient;
+  let oppositeColor = '';
+
+  switch (dominant) {
+    case '#FFFFFF':
+      oppositeColor = '#000000';
+      break;
+
+    case '#000000':
+      oppositeColor = '#FFFFFF';
+
+      break;
+    default:
+      oppositeColor = '#FFFFFF';
+      break;
+  }
   
   useEffect(() => {
     const fetchToken = async () => {
@@ -42,23 +58,6 @@ const Content = (props) => {
     fetchToken();
   }, [token]);
 
-  const hoverHandler = (e) => {
-    const styles = e.target.style;
-
-    styles.outline = `5px solid ${dominant}`;
-    styles.outlineOffset = `-5px`;
-    styles.cursor = `pointer`;
-    styles.transition = `ease-out 0.3s`;
-  };
-
-  const unHoverHandler = (e) => {
-    const styles = e.target.style;
-
-    styles.outline = `0px solid ${dominant}`;
-    styles.outlineOffset = `0px`;
-    styles.transition = `ease-out 0.3s`;
-  };
-
   const authHandler = (sign) => {
     setModalOpen(true);
     setSign(sign);
@@ -67,8 +66,8 @@ const Content = (props) => {
   const renderSign = () => {
     return (
       <>
-        <MenuButton side='left' background={dominant} action={() => authHandler('Sign Up')} title={'Sign Up'} />
-        <MenuButton side='right' background={dominant} action={() => authHandler('Sign In')} title={'Sign In'} />
+        <MenuButton side='left' color={oppositeColor} background={dominant} action={() => authHandler('Sign Up')} title={'Sign Up'} />
+        <MenuButton side='right' color={oppositeColor} background={dominant} action={() => authHandler('Sign In')} title={'Sign In'} />
       </>
     );
   };
@@ -76,35 +75,39 @@ const Content = (props) => {
   const renderLogged = () => {
     return (
       <>
-      <MenuButton side='left' background={dominant} action={() => setModalOpen(true)} title={'Upload'} />
-      <MenuButton side='right' background={dominant} action={() => dispatch(logout())} title={'Logout'} />
+      <MenuButton side='left' color={oppositeColor} background={dominant} action={() => setModalOpen(true)} title={'Upload'} />
+      <MenuButton side='right' color={oppositeColor} background={dominant} action={() => dispatch(logout())} title={'Logout'} />
     </>
     );
   };
 
-  return (
-    <div className='content_container'>
-      {data?.map(({ imageUrl, name, hash }, key) => {
+  const renderPictures = () => {
+    return (
+      data.map(({ imageUrl, name, hash }, key) => {
         const url = `${API_PREFIX}/${imageUrl}`;
 
         return (
-          <PictureWrap 
-            className={'picture_container'}
+          <PictureWrap
+            className='picture_wrapper'
             key={key}
-            onClick={() => window.open(`${API_PREFIX}/images/${hash}`)}
-            onMouseEnter={(e) => hoverHandler(e)}
-            onMouseLeave={(e) => unHoverHandler(e)}> 
+            onClick={() => window.open(`${API_PREFIX}/images/${hash}`)}>
             <img src={url} alt={name} />
           </PictureWrap>
         );
-      })}
+      })
+    )
+  }
+
+  return (
+    <div className='content_container'>
+      {!!data.length ? renderPictures() : <NoPicture color={oppositeColor}/>}
       <div className='menu_container'>
         <div className='menu_wrapper'>
           {isToken ? renderLogged() : renderSign()}
         </div>
       </div>
       <ModalWrap isOpen={isModalOpen} style={mainStyle(dominant)} onRequestClose={() => setModalOpen(false)}>
-        {isToken ? <Upload /> : <Sign sign={sign} setModalOpen={setModalOpen} />}
+        {isToken ? <Upload color={dominant} oppositeColor={oppositeColor}/> : <Sign sign={sign} setModalOpen={setModalOpen} />}
       </ModalWrap>
     </div>
   );
